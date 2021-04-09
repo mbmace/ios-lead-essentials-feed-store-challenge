@@ -19,4 +19,9 @@ class CoreDataFeed: NSManagedObject {
 		request.returnsObjectsAsFaults = false
 		return try context.fetch(request).first
 	}
+
+	static func newInstance(in context: NSManagedObjectContext) throws -> CoreDataFeed {
+		try find(in: context).map(context.delete)
+		return CoreDataFeed(context: context)
+	}
 }

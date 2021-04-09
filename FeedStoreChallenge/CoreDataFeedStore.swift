@@ -50,7 +50,7 @@ public final class CoreDataFeedStore: FeedStore {
 		let context = self.context
 		context.perform {
 			do {
-				let managedCache = CoreDataFeed(context: context)
+				let managedCache = try CoreDataFeed.newInstance(in: context)
 				managedCache.timestamp = timestamp
 				managedCache.items = NSOrderedSet(array: feed.map { local in
 					let managed = CoreDataFeedImage(context: context)
