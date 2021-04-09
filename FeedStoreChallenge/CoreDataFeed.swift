@@ -13,4 +13,10 @@ import CoreData
 class CoreDataFeed: NSManagedObject {
 	@NSManaged public var timestamp: Date
 	@NSManaged public var items: NSOrderedSet
+
+	static func find(in context: NSManagedObjectContext) throws -> CoreDataFeed? {
+		let request = NSFetchRequest<CoreDataFeed>(entityName: entity().name!)
+		request.returnsObjectsAsFaults = false
+		return try context.fetch(request).first
+	}
 }

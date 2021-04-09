@@ -32,9 +32,7 @@ public final class CoreDataFeedStore: FeedStore {
 		let context = self.context
 		context.perform {
 			do {
-				let request = NSFetchRequest<CoreDataFeed>(entityName: CoreDataFeed.entity().name!)
-				request.returnsObjectsAsFaults = false
-				if let cache = try context.fetch(request).first {
+				if let cache = try CoreDataFeed.find(in: context) {
 					completion(.found(
 						feed: cache.items
 							.compactMap { ($0 as? CoreDataFeedImage)?.toLocal() },
