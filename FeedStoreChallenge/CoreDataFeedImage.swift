@@ -15,6 +15,7 @@ class CoreDataFeedImage: NSManagedObject {
 	@NSManaged var descriptionText: String?
 	@NSManaged var location: String?
 	@NSManaged var url: URL
+	@NSManaged var cache: CoreDataFeed
 
 	func toLocal() -> LocalFeedImage {
 		LocalFeedImage(id: id, description: descriptionText, location: location, url: url)
