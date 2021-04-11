@@ -24,4 +24,8 @@ class CoreDataFeed: NSManagedObject {
 		try find(in: context).map(context.delete)
 		return CoreDataFeed(context: context)
 	}
+
+	var localItems: [LocalFeedImage] {
+		items.compactMap { ($0 as? CoreDataFeedImage)?.toLocal() }
+	}
 }

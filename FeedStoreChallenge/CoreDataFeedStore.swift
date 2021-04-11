@@ -33,10 +33,7 @@ public final class CoreDataFeedStore: FeedStore {
 		context.perform {
 			do {
 				if let cache = try CoreDataFeed.find(in: context) {
-					completion(.found(
-						feed: cache.items
-							.compactMap { ($0 as? CoreDataFeedImage)?.toLocal() },
-						timestamp: cache.timestamp))
+					completion(.found(feed: cache.localItems, timestamp: cache.timestamp))
 				} else {
 					completion(.empty)
 				}
